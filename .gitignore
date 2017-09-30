@@ -1,0 +1,14 @@
+.idea/
+*.zip
+certifi
+certifi-2017.7.27.1.dist-info
+chardet
+chardet-3.0.4.dist-info
+requests
+requests-2.18.4.dist-info
+idna
+idna-2.6.dist-info
+urllib3
+urllib3-1.22.dist-info
+env.py
+event.json
