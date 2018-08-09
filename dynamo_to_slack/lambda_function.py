@@ -34,6 +34,8 @@ def lambda_handler(event, context):
         slack_url = os.environ.get('SLACK_URL', None)
         slack_channel = os.environ.get('SLACK_CHANNEL', None)
 
+        teams_url = os.environ.get('TEAMS_URL', None)
+
         # data to slack
         if not('Records' in event):
             return event
@@ -62,7 +64,7 @@ def lambda_handler(event, context):
                 json.dumps(
                     {
                         'channel': slack_channel,
-                        'attachments':[
+                        'attachments': [
                             {
                                 'author_name': origin,
                                 'title': title,
@@ -70,6 +72,20 @@ def lambda_handler(event, context):
                                 'text': summary
                             }
                         ]
+                    }
+                )
+            )
+
+            #data to teams
+            requests.post(
+                teams_url,
+                json.dumps(
+                    {
+                        'title': title,
+                        'text': '[{summary}]({url})'.format(
+                            summary=summary,
+                            url=url
+                        )
                     }
                 )
             )
